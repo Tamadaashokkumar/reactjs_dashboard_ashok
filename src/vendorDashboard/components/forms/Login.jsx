@@ -30,8 +30,9 @@ const Login = ({ showWelcomeHandiler }) => {
             }
             const vendorId = data.vendorId
             const vendorResponse = await fetch(`${url}/vendor/single-vendor/${vendorId}`)
-            const value = await vendorResponse.json()
             window.location.reload()
+            const value = await vendorResponse.json()
+
             if (vendorResponse.ok) {
                 const firmId = value.vendorFirmId
                 const firmName = value.vendor.firm[0].firmName
@@ -39,8 +40,6 @@ const Login = ({ showWelcomeHandiler }) => {
                 localStorage.setItem("firmId", firmId)
                 localStorage.setItem("vendorId", vendorId)
             }
-
-
         } catch (error) {
             console.log(error)
             alert("Login Failed")

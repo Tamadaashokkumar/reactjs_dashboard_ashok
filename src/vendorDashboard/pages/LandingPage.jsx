@@ -36,22 +36,35 @@ const LandingPage = () => {
         setUserDetials(false)
     }
     const showAddFirmHandiler = () => {
-        setShowRegister(false)
-        setShowLogin(false)
-        setshowAddFirm(true)
-        setShowAddProduct(false)
-        setShowAllProducts(false)
-        setShowWelcome(false)
-        setUserDetials(false)
+        if (showLogOut) {
+            setShowRegister(false)
+            setShowLogin(false)
+            setshowAddFirm(true)
+            setShowAddProduct(false)
+            setShowAllProducts(false)
+            setShowWelcome(false)
+            setUserDetials(false)
+
+        } else {
+            alert("Please Login")
+            setShowLogin(true)
+        }
+
     }
     const showAddProductHandiler = () => {
-        setShowRegister(false)
-        setShowLogin(false)
-        setshowAddFirm(false)
-        setShowAddProduct(true)
-        setShowAllProducts(false)
-        setShowWelcome(false)
-        setUserDetials(false)
+        if (showLogOut) {
+            setShowRegister(false)
+            setShowLogin(false)
+            setshowAddFirm(false)
+            setShowAddProduct(true)
+            setShowAllProducts(false)
+            setShowWelcome(false)
+            setUserDetials(false)
+        } else {
+            alert("Please Login")
+            setShowLogin(true)
+        }
+
     }
     const showWelcomeHandiler = () => {
         setShowRegister(false)
@@ -63,22 +76,36 @@ const LandingPage = () => {
         setUserDetials(false)
     }
     const showAllproudctsHandiler = () => {
-        setShowRegister(false)
-        setShowLogin(false)
-        setshowAddFirm(false)
-        setShowAddProduct(false)
-        setShowWelcome(false)
-        setShowAllProducts(true)
-        setUserDetials(false)
+        if (showLogOut) {
+            setShowRegister(false)
+            setShowLogin(false)
+            setshowAddFirm(false)
+            setShowAddProduct(false)
+            setShowWelcome(false)
+            setShowAllProducts(true)
+            setUserDetials(false)
+
+        } else {
+            alert("Please Login")
+            setShowLogin(true)
+        }
+
     }
     const userDetialsHandler = () => {
-        setShowRegister(false)
-        setShowLogin(false)
-        setshowAddFirm(false)
-        setShowAddProduct(false)
-        setShowWelcome(false)
-        setShowAllProducts(false)
-        setUserDetials(true)
+        if (showLogOut) {
+            setShowRegister(false)
+            setShowLogin(false)
+            setshowAddFirm(false)
+            setShowAddProduct(false)
+            setShowWelcome(false)
+            setShowAllProducts(false)
+            setUserDetials(true)
+
+        } else {
+            alert("Please Login")
+            setShowLogin(true)
+        }
+
 
     }
 
