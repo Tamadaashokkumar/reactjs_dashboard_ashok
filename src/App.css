@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+.navSection{
+    height:70px;
+    background:rgb(4, 234, 255);
+    color:white;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: large;
+    padding:0 20px;
+    border-bottom:2px solid rgb(6, 12, 11);
+}
+.company {
+    font-weight:bold;
+    font-size:20px;
+    color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+.loginREgister {
+    font-size:20px;
+    font-weight:bold;
+    color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+.sideBarSection {
+    width:100%;
+    max-width:20%;
+    min-height:100vh;
+    background-image:linear-gradient(rgb(4, 234, 255),rgb(247, 235, 10));
+    color:white;
+    padding-top:10px;
+    border-right:1px solid black;
+}
+.sideBarSection ul li {
+    list-style: none;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: medium;
+    cursor: pointer;
+    color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+.collectionSection{
+    display:flex;
+}
+
+
+
+/* login section */
+
+.loginSection {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.registerSection {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.authForm {
+    width:100%;
+    max-width:50%;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    border-radius:10px;
+    background-image:linear-gradient(rgb(83, 14, 195),rgb(27, 225, 219));
+    color:white;
+    padding:20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.authForm label {
+    width:100%;
+    max-width:55%;
+    font-weight:400;
+}
+.authForm input {
+    width:100%;
+    max-width:55%;
+    height:1.4rem;
+    border-radius:14px;
+    outline:none;
+    border:none;
+    padding:4px;
+    font-size:12px;
+}
+
+/*Firm add section */
+
+.firmSection {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top:6px;
+    color:white;
+}
+.tableForm {
+    width:100%;
+    max-width: 65%;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    border-radius:10px;
+    padding:10px;
+    background-image:linear-gradient(rgb(83, 14, 195),rgb(27, 225, 219));
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ 
+   
+}
+.tableForm label {
+    width:100%;
+    max-width:85%;
+    font-weight:600;
+}
+.tableForm input {
+    width:100%;
+    max-width:85%;
+    height:20px;
+} 
+.categoryContainer {
+    width:100%;
+    max-width:85%;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.checkBoxContainer {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:20%;
+}
+.checkBoxContainer label {
+    font-size:10px;
+    width:40px;
+}
+
+.collectionSection {
+    background-image:linear-gradient(rgb(4, 234, 255),rgb(247, 235, 10));
+}
+.submitButton {
+    background-color:transparent;
+    padding:6px 16px;
+    border-radius:12px;
+    font-weight:bold;
+    background-image:linear-gradient(rgb(237, 128, 4),rgb(255, 0, 166));
+    color:rgb(18, 1, 1);
+    outline:none;
+    border:none;
+}
+ 
+.FirmInput {
+    outline:none;
+    border-radius:14px;
+    border:none;
+    padding:4px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.productImage{
+    height:50px;
+}
+.productsContainer {
+    width:100%;
+    display:flex;
+    justify-content: center;
+   
+}
+.tableCard {
+   width:100%;
+   max-width:85%;
+   display:flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   
+}
+.product-table {
+    width:100%;
+    border : 2px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    background-image:linear-gradient(rgb(33, 30, 27),rgb(223, 71, 169));
+    color:white;
+}
+.product-table th,
+.product-table td
+{
+    border : 2px solid black;
+    padding:8px;
+}
+
+.firmName h1 {
+    font-family: "Roboto", sans-serif;
+  
+}
+
+.errorSection {
+    height:100vh;
+    width:100vw;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-family: "Roboto", sans-serif;
+    font-weight:bold;
+    text-align: center;
+    background-image:linear-gradient(rgb(33, 30, 27),rgb(238, 255, 0));
+
+}
+.welcomeSection {
+    background-image: url("https://img.freepik.com/free-photo/portrait-chef-cook-holding-fast-food-burger_23-2151004531.jpg?t=st=1742897771~exp=1742901371~hmac=bb487f493e2a621c5465b074f7887720361459a244cfaad2032dfed6ed1442ef&w=1380");
+    background-size: cover;
+    width: 100%;
+    color:white;
+    display:flex;
+    align-items: center;
+}
+.welcomeSection h2 {
+    margin-left:20px;
+}
+
+/* user Detials */ 
