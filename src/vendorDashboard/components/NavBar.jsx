@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Navbar = ({ showLoginHandiler, showRegisterHandiler, showLogOut, logOutHandler }) => {
+const Navbar = ({ showLoginHandiler, showWelcomeHandiler, showRegisterHandiler, showLogOut, logOutHandler }) => {
     const firmName = localStorage.getItem("firmName")
     return (
         <div className="navSection">
-            <div className="company">
+            <div className="company" onClick={showWelcomeHandiler}>
                 Vendor Dashboard
             </div>
             {firmName ?

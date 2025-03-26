@@ -67,13 +67,18 @@ const LandingPage = () => {
 
     }
     const showWelcomeHandiler = () => {
-        setShowRegister(false)
-        setShowLogin(false)
-        setshowAddFirm(false)
-        setShowAddProduct(false)
-        setShowWelcome(true)
-        setShowAllProducts(false)
-        setUserDetials(false)
+        if (showLogOut) {
+            setShowRegister(false)
+            setShowLogin(false)
+            setshowAddFirm(false)
+            setShowAddProduct(false)
+            setShowWelcome(true)
+            setShowAllProducts(false)
+            setUserDetials(false)
+        } else {
+            alert("Please Login")
+            setShowLogin(true)
+        }
     }
     const showAllproudctsHandiler = () => {
         if (showLogOut) {
@@ -145,7 +150,7 @@ const LandingPage = () => {
 
     return (
         <section className="landingSection">
-            <Navbar logOutHandler={logOutHandler} showLogOut={showLogOut} showLoginHandiler={showLoginHandiler} showRegisterHandiler={showRegisterHandiler} />
+            <Navbar showWelcomeHandiler={showWelcomeHandiler} logOutHandler={logOutHandler} showLogOut={showLogOut} showLoginHandiler={showLoginHandiler} showRegisterHandiler={showRegisterHandiler} />
             <div className="collectionSection">
                 <SideBar userDetialsHandler={userDetialsHandler} firmToggle={firmToggle} showAllproudctsHandiler={showAllproudctsHandiler} showAddFirmHandiler={showAddFirmHandiler} showAddProductHandiler={showAddProductHandiler} />
                 {showAddFirm && showLogOut && <AddFirm />}
