@@ -7,7 +7,9 @@ import AddProduct from '../components/forms/AddProduct'
 import Welcome from '../components/Welcome'
 import AllProducts from '../components/AllProducts'
 import Navbar from '../components/NavBar'
-import UserDetails from '../components/UserDetails'
+
+
+
 const LandingPage = () => {
     const [showLogin, setShowLogin] = useState(false)
     const [showRegister, setShowRegister] = useState(false)
@@ -17,103 +19,6 @@ const LandingPage = () => {
     const [showAllProducts, setShowAllProducts] = useState(false)
     const [showLogOut, setShowLogOut] = useState(false)
     const [firmToggle, setFrimToggle] = useState(true)
-    const [userDetails, setUserDetials] = useState(false)
-
-    const showLoginHandiler = () => {
-        setShowLogin(true)
-        setShowRegister(false)
-        setshowAddFirm(false)
-        setShowAddProduct(false)
-        setShowAllProducts(false)
-        setUserDetials(false)
-    }
-    const showRegisterHandiler = () => {
-        setShowRegister(true)
-        setShowLogin(false)
-        setshowAddFirm(false)
-        setShowAddProduct(false)
-        setShowAllProducts(false)
-        setUserDetials(false)
-    }
-    const showAddFirmHandiler = () => {
-        if (showLogOut) {
-            setShowRegister(false)
-            setShowLogin(false)
-            setshowAddFirm(true)
-            setShowAddProduct(false)
-            setShowAllProducts(false)
-            setShowWelcome(false)
-            setUserDetials(false)
-
-        } else {
-            alert("Please Login")
-            setShowLogin(true)
-        }
-
-    }
-    const showAddProductHandiler = () => {
-        if (showLogOut) {
-            setShowRegister(false)
-            setShowLogin(false)
-            setshowAddFirm(false)
-            setShowAddProduct(true)
-            setShowAllProducts(false)
-            setShowWelcome(false)
-            setUserDetials(false)
-        } else {
-            alert("Please Login")
-            setShowLogin(true)
-        }
-
-    }
-    const showWelcomeHandiler = () => {
-        if (showLogOut) {
-            setShowRegister(false)
-            setShowLogin(false)
-            setshowAddFirm(false)
-            setShowAddProduct(false)
-            setShowWelcome(true)
-            setShowAllProducts(false)
-            setUserDetials(false)
-        } else {
-            alert("Please Login")
-            setShowLogin(true)
-        }
-    }
-    const showAllproudctsHandiler = () => {
-        if (showLogOut) {
-            setShowRegister(false)
-            setShowLogin(false)
-            setshowAddFirm(false)
-            setShowAddProduct(false)
-            setShowWelcome(false)
-            setShowAllProducts(true)
-            setUserDetials(false)
-
-        } else {
-            alert("Please Login")
-            setShowLogin(true)
-        }
-
-    }
-    const userDetialsHandler = () => {
-        if (showLogOut) {
-            setShowRegister(false)
-            setShowLogin(false)
-            setshowAddFirm(false)
-            setShowAddProduct(false)
-            setShowWelcome(false)
-            setShowAllProducts(false)
-            setUserDetials(true)
-
-        } else {
-            alert("Please Login")
-            setShowLogin(true)
-        }
-
-
-    }
-
 
     useEffect(() => {
         const jwt = localStorage.getItem("jwt")
@@ -139,7 +44,6 @@ const LandingPage = () => {
             localStorage.removeItem("jwt")
             localStorage.removeItem("firmId")
             localStorage.removeItem("firmName")
-            localStorage.removeItem("vendorId")
             setShowLogOut(false)
             setFrimToggle(true)
             setShowWelcome(false)
@@ -147,24 +51,110 @@ const LandingPage = () => {
     }
 
 
+    const showLoginHandiler = () => {
+        setShowLogin(true)
+        setShowRegister(false)
+        setshowAddFirm(false)
+        setShowAddProduct(false)
+        setShowAllProducts(false)
+        setShowWelcome(false)
 
+    }
+    const showRegisterHandiler = () => {
+        setShowRegister(true)
+        setShowLogin(false)
+        setshowAddFirm(false)
+        setShowAddProduct(false)
+        setShowAllProducts(false)
+        setShowWelcome(false)
+
+    }
+    const showAddFirmHandiler = () => {
+        if (showLogOut) {
+            setShowRegister(false)
+            setShowLogin(false)
+            setshowAddFirm(true)
+            setShowAddProduct(false)
+            setShowAllProducts(false)
+            setShowWelcome(false)
+            setShowWelcome(false)
+
+
+        } else {
+            alert("Please Login")
+            setShowLogin(true)
+        }
+
+    }
+    const showAddProductHandiler = () => {
+        if (showLogOut) {
+            setShowRegister(false)
+            setShowLogin(false)
+            setshowAddFirm(false)
+            setShowAddProduct(true)
+            setShowAllProducts(false)
+            setShowWelcome(false)
+            setShowWelcome(false)
+
+        } else {
+            alert("Please Login")
+            setShowLogin(true)
+        }
+
+    }
+    const showWelcomeHandiler = () => {
+        setShowRegister(false)
+        setShowLogin(false)
+        setshowAddFirm(false)
+        setShowAddProduct(false)
+        setShowWelcome(true)
+        setShowAllProducts(false)
+
+    }
+    const showAllproudctsHandiler = () => {
+        if (showLogOut) {
+            setShowRegister(false)
+            setShowLogin(false)
+            setshowAddFirm(false)
+            setShowAddProduct(false)
+            setShowWelcome(false)
+            setShowAllProducts(true)
+            setShowWelcome(false)
+
+
+        } else {
+            alert("Please Login")
+            setShowLogin(true)
+        }
+    }
     return (
         <section className="landingSection">
             <Navbar showWelcomeHandiler={showWelcomeHandiler} logOutHandler={logOutHandler} showLogOut={showLogOut} showLoginHandiler={showLoginHandiler} showRegisterHandiler={showRegisterHandiler} />
             <div className="collectionSection">
-                <SideBar userDetialsHandler={userDetialsHandler} firmToggle={firmToggle} showAllproudctsHandiler={showAllproudctsHandiler} showAddFirmHandiler={showAddFirmHandiler} showAddProductHandiler={showAddProductHandiler} />
+                <SideBar firmToggle={firmToggle} showAllproudctsHandiler={showAllproudctsHandiler} showAddFirmHandiler={showAddFirmHandiler} showAddProductHandiler={showAddProductHandiler} />
                 {showAddFirm && showLogOut && <AddFirm />}
                 {showLogin && <Login showWelcomeHandiler={showWelcomeHandiler} />}
                 {showRegister && <Register showLoginHandiler={showLoginHandiler} />}
                 {showAddProduct && showLogOut && <AddProduct />}
-                {showWelcome && <Welcome />}
+                {showWelcome && showLogOut && <Welcome />}
                 {showAllProducts && showLogOut && <AllProducts />}
-                {userDetails && showLogOut && <UserDetails />}
-
             </div>
 
         </section>
     )
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
 
 export default LandingPage

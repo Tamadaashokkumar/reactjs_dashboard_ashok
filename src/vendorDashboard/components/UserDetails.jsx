@@ -1,31 +1,7 @@
-import React, { useState, useEffect } from "react";
-const url = "https://nodejs-backend-ashok.onrender.com"
+import React from 'react'
 
-
-const UserDetails = () => {
-    const [vendorDetails, setVendorDetials] = useState([])
-    const vendorId = localStorage.getItem("vendorId")
-    const getVendorDetails = async () => {
-        const vendorResponse = await fetch(`${url}/vendor/single-vendor/${vendorId}`)
-        const value = await vendorResponse.json()
-        setVendorDetials(value.vendor)
-
-
-    }
-
-    useEffect(() => {
-        getVendorDetails()
-    }, [])
-
-
+export const UserDetails = () => {
     return (
-        <div className="firmSection">
-            <div className="tableForm" >
-                <p>username : {vendorDetails.username}</p>
-                <p>Email : {vendorDetails.email} </p>
-            </div>
-        </div>
-    );
-};
-
-export default UserDetails;
+        <div>UserDetails</div>
+    )
+}

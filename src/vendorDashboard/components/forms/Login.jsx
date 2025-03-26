@@ -38,7 +38,8 @@ const Login = ({ showWelcomeHandiler }) => {
                 const firmName = value.vendor.firm[0].firmName
                 localStorage.setItem("firmName", firmName)
                 localStorage.setItem("firmId", firmId)
-                localStorage.setItem("vendorId", vendorId)
+
+
             }
         } catch (error) {
             console.log(error)
