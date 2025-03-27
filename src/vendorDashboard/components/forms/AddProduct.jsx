@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { url } from '../../api'
+
+
 const AddProduct = () => {
     const [productName, setProductName] = useState("")
     const [price, setPrice] = useState("")
@@ -9,8 +11,9 @@ const AddProduct = () => {
     const [category, setCategory] = useState([])
 
     const updateimages = (e) => {
-        setFile(e.target.files[0])
-        console.log("ashok", e.target.files[0])
+        const val = e.target.files[0]
+        setFile(val)
+
     }
     const bestSetterUpdate = (e) => {
         const value = e.target.value === "true"
@@ -37,7 +40,6 @@ const AddProduct = () => {
                 console.error("user not authenticated")
             }
 
-
             const productForm = new FormData()
             productForm.append("productName", productName)
             productForm.append("price", price)
@@ -49,8 +51,6 @@ const AddProduct = () => {
             })
 
 
-
-            console.log(firmId)
             const options = {
                 method: "POST",
                 body: productForm
@@ -117,6 +117,8 @@ const AddProduct = () => {
                     </div>
                 </form>
             </div>
+
+
         </div>
     )
 }
