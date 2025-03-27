@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
+import { url } from '../../api';
 
-
-const url = "https://nodejs-backend-ashok.onrender.com"
 const Login = ({ showWelcomeHandiler }) => {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");

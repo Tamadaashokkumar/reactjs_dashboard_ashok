@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-const url = "https://nodejs-backend-ashok.onrender.com"
-
+import { url } from '../api'
 
 const AllProducts = () => {
     const [products, setProducts] = useState([])
