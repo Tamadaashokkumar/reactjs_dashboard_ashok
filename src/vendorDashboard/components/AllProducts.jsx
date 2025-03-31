@@ -74,7 +74,7 @@ const AllProducts = () => {
                                             <td>{item.productName}</td>
                                             <td>{item.price}</td>
                                             <td>
-                                                <img src={`${url}/uploads/${item.image}`} className="productImage" alt={item.productName} />
+                                                <img src={item.image} className="productImage" alt={item.productName} />
                                             </td>
                                             <td>
                                                 <button className="submitButton" onClick={() => delteProductHandler(item._id)}>Delete</button>

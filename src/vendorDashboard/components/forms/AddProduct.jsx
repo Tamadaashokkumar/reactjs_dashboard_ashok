@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { url } from '../../api'
-
+import { RotatingLines } from 'react-loader-spinner';
 
 const AddProduct = () => {
     const [productName, setProductName] = useState("")
@@ -9,6 +9,8 @@ const AddProduct = () => {
     const [Description, setDescription] = useState("")
     const [file, setFile] = useState(null)
     const [category, setCategory] = useState([])
+    const [loading, setLoading] = useState(false);
+
 
     const updateimages = (e) => {
         const val = e.target.files[0]
@@ -32,7 +34,10 @@ const AddProduct = () => {
 
 
     const productSubmitHandler = async (e) => {
+        const token = localStorage.getItem("jwt")
+
         e.preventDefault()
+        setLoading(true)
         try {
             const firmId = localStorage.getItem("firmId")
             const jwt = localStorage.getItem("jwt")
@@ -50,14 +55,17 @@ const AddProduct = () => {
                 productForm.append("category", item)
             })
 
-
             const options = {
                 method: "POST",
+                headers: {
+                    token: token
+                },
                 body: productForm
             }
             const response = await fetch(`${url}/product/add-product/${firmId}`, options)
             const data = await response.json()
             if (response.ok) {
+                setLoading(false)
                 alert("product added successfully")
                 console.log("product added successfully")
                 setProductName("")
@@ -70,6 +78,8 @@ const AddProduct = () => {
 
         } catch (err) {
             console.log(err)
+            loading(false)
+
         }
 
     }
@@ -77,49 +87,64 @@ const AddProduct = () => {
 
 
     return (
-        <div className="firmSection">
-            <div className="firmSection">
-                <form className="tableForm" onSubmit={productSubmitHandler}>
-                    <h2>Add Product</h2>
-                    <label htmlFor="name">Product Name</label>
-                    <input type="text" id="name" className="FirmInput" value={productName} onChange={e => setProductName(e.target.value)} />
-                    <label htmlFor="price">Price</label>
-                    <input type="text" id="price" className="FirmInput" value={price} onChange={e => setPrice(e.target.value)} />
-                    <label htmlFor="">Category</label>
-                    <div className="categoryContainer">
-                        <div className="checkBoxContainer">
-                            <label htmlFor="veg">Veg</label>
-                            <input type="checkbox" className="FirmInput" id="veg" value="veg" checked={category.includes("veg")} onChange={updateCategory} />
-                        </div>
-                        <div className="checkBoxContainer">
-                            <label htmlFor="nonveg" >Non Veg</label>
-                            <input type="checkbox" className="FirmInput" id="nonveg" value="non-veg" checked={category.includes("non-veg")} onChange={updateCategory} />
-                        </div>
+        <>
+            {loading ? <div className="loadingSection">
+                <RotatingLines
+                    visible={true}
+                    height="156"
+                    width="156"
+                    color="grey"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    ariaLabel="rotating-lines-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="" />
+            </div> : (
+                <div className="firmSection">
+                    <div className="firmSection">
+                        <form className="tableForm" onSubmit={productSubmitHandler}>
+                            <h2>Add Product</h2>
+                            <label htmlFor="name">Product Name</label>
+                            <input type="text" id="name" className="FirmInput" value={productName} onChange={e => setProductName(e.target.value)} />
+                            <label htmlFor="price">Price</label>
+                            <input type="text" id="price" className="FirmInput" value={price} onChange={e => setPrice(e.target.value)} />
+                            <label htmlFor="">Category</label>
+                            <div className="categoryContainer">
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="veg">Veg</label>
+                                    <input type="checkbox" className="FirmInput" id="veg" value="veg" checked={category.includes("veg")} onChange={updateCategory} />
+                                </div>
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="nonveg" >Non Veg</label>
+                                    <input type="checkbox" className="FirmInput" id="nonveg" value="non-veg" checked={category.includes("non-veg")} onChange={updateCategory} />
+                                </div>
+                            </div>
+                            <label>Best Seller</label>
+                            <div className="categoryContainer">
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="yes">Yes</label>
+                                    <input type="radio" className="FirmInput" id="yes" name="bestseller" value="true" checked={bestSeller === true} onChange={bestSetterUpdate} />
+                                </div>
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="no" >No</label>
+                                    <input type="radio" className="FirmInput" id="no" name="bestseller" value="false" checked={bestSeller === false} onChange={bestSetterUpdate} />
+                                </div>
+                            </div>
+                            <label>Description</label>
+                            <input type="text" className="FirmInput" value={Description} onChange={e => setDescription(e.target.value)} />
+                            <label>Firm Image</label>
+                            <input type="file" className="FirmInput" onChange={updateimages} />
+                            <br />
+                            <div>
+                                <button type="submit" className="submitButton">Submit</button>
+                            </div>
+                        </form>
                     </div>
-                    <label>Best Seller</label>
-                    <div className="categoryContainer">
-                        <div className="checkBoxContainer">
-                            <label htmlFor="yes">Yes</label>
-                            <input type="radio" className="FirmInput" id="yes" name="bestseller" value="true" checked={bestSeller === true} onChange={bestSetterUpdate} />
-                        </div>
-                        <div className="checkBoxContainer">
-                            <label htmlFor="no" >No</label>
-                            <input type="radio" className="FirmInput" id="no" name="bestseller" value="false" checked={bestSeller === false} onChange={bestSetterUpdate} />
-                        </div>
-                    </div>
-                    <label>Description</label>
-                    <input type="text" className="FirmInput" value={Description} onChange={e => setDescription(e.target.value)} />
-                    <label>Firm Image</label>
-                    <input type="file" className="FirmInput" onChange={updateimages} />
-                    <br />
-                    <div>
-                        <button type="submit" className="submitButton">Submit</button>
-                    </div>
-                </form>
-            </div>
 
 
-        </div>
+                </div>
+            )}
+        </>
     )
 }
 

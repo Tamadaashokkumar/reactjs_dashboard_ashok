@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { url } from '../../api';
-
+import { RotatingLines } from 'react-loader-spinner';
 const Login = ({ showWelcomeHandiler }) => {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
@@ -8,6 +8,7 @@ const Login = ({ showWelcomeHandiler }) => {
 
     const loginHandler = async (e) => {
         e.preventDefault()
+        setLoading(true)
         try {
             const options = {
                 method: "POST",
@@ -20,6 +21,7 @@ const Login = ({ showWelcomeHandiler }) => {
             const data = await response.json()
 
             if (response.ok) {
+                setLoading(false)
                 alert("login successfull")
                 localStorage.setItem("jwt", data.token)
                 setemail("")
@@ -43,21 +45,41 @@ const Login = ({ showWelcomeHandiler }) => {
         } catch (error) {
             console.log(error)
             alert("Login Failed")
+            setLoading(false)
         }
     }
     return (
-        <div className="loginSection">
-            <form className="authForm" onSubmit={loginHandler}>
-                <h2>Vendor Login</h2>
-                <label htmlFor="email" >Email</label>
-                <input type="text" id="email" name="email" value={email} placeholder="enter your email" onChange={e => setemail(e.target.value)} /><br />
-                <label htmlFor="password">Password</label>
-                <input type="text" id="password" name="email" value={password} placeholder="enter your password" onChange={e => setpassword(e.target.value)} /> <br />
-                <div>
-                    <button type="submit" className="submitButton">Submit</button>
+        <>
+
+            {loading ?
+                <div className="loadingSection">
+                    <RotatingLines
+                        visible={true}
+                        height="156"
+                        width="156"
+                        color="grey"
+                        strokeWidth="5"
+                        animationDuration="0.75"
+                        ariaLabel="rotating-lines-loading"
+                        wrapperStyle={{}}
+                        wrapperClass="" />
+                </div> :
+                (<div className="loginSection">
+                    <form className="authForm" onSubmit={loginHandler}>
+                        <h2>Vendor Login</h2>
+                        <label htmlFor="email" >Email</label>
+                        <input type="text" id="email" name="email" value={email} placeholder="enter your email" onChange={e => setemail(e.target.value)} /><br />
+                        <label htmlFor="password">Password</label>
+                        <input type="text" id="password" name="email" value={password} placeholder="enter your password" onChange={e => setpassword(e.target.value)} /> <br />
+                        <div>
+                            <button type="submit" className="submitButton">Submit</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
+                )
+            }
+
+        </>
     )
 }
 

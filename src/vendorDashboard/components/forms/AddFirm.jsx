@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { RotatingLines } from 'react-loader-spinner';
 import { url } from '../../api'
 const AddFirm = () => {
     const [firmName, setFirmName] = useState("")
@@ -7,6 +8,7 @@ const AddFirm = () => {
     const [region, setRegion] = useState([])
     const [offer, setOffer] = useState("")
     const [file, setFile] = useState(null)
+    const [loading, setLoading] = useState(false)
 
 
     const updateImageHandler = (e) => {
@@ -32,6 +34,7 @@ const AddFirm = () => {
 
     const submitFirmData = async (e) => {
         e.preventDefault()
+        setLoading(true)
         const jwt = localStorage.getItem("jwt")
         if (!jwt) {
             console.log("user not authenticated")
@@ -61,6 +64,7 @@ const AddFirm = () => {
             const response = await fetch(`${url}/firm/add-firm`, options)
             const data = await response.json()
             if (response.ok) {
+                setLoading(false)
                 console.log("Add Firm Successfully")
                 alert("Add Firm Successfully")
                 setFirmName("")
@@ -71,8 +75,10 @@ const AddFirm = () => {
                 setOffer("")
             } else if (data.message === "vendor can have only one firm") {
                 alert("Firm Exists 🥗. Only 1 firm can be added  ")
+                setLoading(false)
             } else {
                 alert('Failed to add Firm')
+                setLoading(false)
             }
 
             const firmId = data.firmId
@@ -81,6 +87,7 @@ const AddFirm = () => {
             localStorage.setItem("firmName", restaurantName)
             window.location.reload()
         } catch (err) {
+            setLoading(false)
             console.error(err)
             alert("firm not added")
         }
@@ -89,54 +96,71 @@ const AddFirm = () => {
 
 
     return (
-        <div className="firmSection">
-            <form className="tableForm" onSubmit={submitFirmData}>
-                <h2>Add Firm</h2>
-                <label>Firm Name</label>
-                <input type="text" className="FirmInput" value={firmName} name="firmName" onChange={e => setFirmName(e.target.value)} />
-                <label>Area</label>
-                <input type="text" className="FirmInput" value={area} name="area" onChange={e => setArea(e.target.value)} />
-                <label htmlFor="">Category</label>
-                <div className="categoryContainer">
-                    <div className="checkBoxContainer">
-                        <label htmlFor="veg">Veg</label>
-                        <input type="checkbox" className="FirmInput" id="veg" value="veg" checked={category.includes("veg")} onChange={updateCategory} />
-                    </div>
-                    <div className="checkBoxContainer">
-                        <label htmlFor="non-veg">Non Veg</label>
-                        <input type="checkbox" className="FirmInput" id="non-veg" value="non-veg" checked={category.includes("non-veg")} onChange={updateCategory} />
-                    </div>
-                </div>
-                <label>Offer</label>
-                <input type="text" className="FirmInput" value={offer} name="offer" onChange={e => setOffer(e.target.value)} />
-                <label>Region</label>
-                <div className="categoryContainer">
-                    <div className="checkBoxContainer">
-                        <label htmlFor="veg">South-Indian</label>
-                        <input type="checkbox" className="FirmInput" value="south-indian" id="veg" checked={region.includes("south-indian")} onChange={updateRegion} />
-                    </div>
-                    <div className="checkBoxContainer">
-                        <label htmlFor="north-indian">North-Indian</label>
-                        <input type="checkbox" className="FirmInput" id="north-indian" value='north-indian' checked={region.includes("north-indian")} onChange={updateRegion} />
-                    </div>
-                    <div className="checkBoxContainer">
-                        <label htmlFor="south-indian">Chinese</label>
-                        <input type="checkbox" className="FirmInput" id="south-indian" value="chinese" checked={region.includes("chinese")} onChange={updateRegion} />
-                    </div>
-                    <div className="checkBoxContainer">
-                        <label htmlFor="bakery">Bakery</label>
-                        <input type="checkbox" className="FirmInput" id="bakery" value="bakery" checked={region.includes("bakery")} onChange={updateRegion} />
-                    </div>
-                </div>
+        <>
+            {loading ? <div className="loadingSection">
+                <RotatingLines
+                    visible={true}
+                    height="156"
+                    width="156"
+                    color="grey"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    ariaLabel="rotating-lines-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="" />
+            </div> :
+                (
+                    <div className="firmSection">
+                        <form className="tableForm" onSubmit={submitFirmData}>
+                            <h2>Add Firm</h2>
+                            <label>Firm Name</label>
+                            <input type="text" className="FirmInput" value={firmName} name="firmName" onChange={e => setFirmName(e.target.value)} />
+                            <label>Area</label>
+                            <input type="text" className="FirmInput" value={area} name="area" onChange={e => setArea(e.target.value)} />
+                            <label htmlFor="">Category</label>
+                            <div className="categoryContainer">
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="veg">Veg</label>
+                                    <input type="checkbox" className="FirmInput" id="veg" value="veg" checked={category.includes("veg")} onChange={updateCategory} />
+                                </div>
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="non-veg">Non Veg</label>
+                                    <input type="checkbox" className="FirmInput" id="non-veg" value="non-veg" checked={category.includes("non-veg")} onChange={updateCategory} />
+                                </div>
+                            </div>
+                            <label>Offer</label>
+                            <input type="text" className="FirmInput" value={offer} name="offer" onChange={e => setOffer(e.target.value)} />
+                            <label>Region</label>
+                            <div className="categoryContainer">
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="veg">South-Indian</label>
+                                    <input type="checkbox" className="FirmInput" value="south-indian" id="veg" checked={region.includes("south-indian")} onChange={updateRegion} />
+                                </div>
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="north-indian">North-Indian</label>
+                                    <input type="checkbox" className="FirmInput" id="north-indian" value='north-indian' checked={region.includes("north-indian")} onChange={updateRegion} />
+                                </div>
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="south-indian">Chinese</label>
+                                    <input type="checkbox" className="FirmInput" id="south-indian" value="chinese" checked={region.includes("chinese")} onChange={updateRegion} />
+                                </div>
+                                <div className="checkBoxContainer">
+                                    <label htmlFor="bakery">Bakery</label>
+                                    <input type="checkbox" className="FirmInput" id="bakery" value="bakery" checked={region.includes("bakery")} onChange={updateRegion} />
+                                </div>
+                            </div>
 
-                <label>Firm Image</label>
-                <input type="file" className="FirmInput" onChange={updateImageHandler} />
-                <br />
-                <div >
-                    <button type="submit" className="submitButton">Submit</button>
-                </div>
-            </form>
-        </div>
+                            <label>Firm Image</label>
+                            <input type="file" className="FirmInput" onChange={updateImageHandler} />
+                            <br />
+                            <div >
+                                <button type="submit" className="submitButton">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        </>
     )
 }
 
